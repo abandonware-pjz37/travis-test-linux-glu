@@ -1,0 +1,27 @@
+language:
+  - cpp
+
+# Container-based infrastructure (Linux)
+# * https://docs.travis-ci.com/user/migrating-from-legacy/#How-can-I-use-container-based-infrastructure%3F
+sudo:
+  - false
+
+dist:
+  - trusty
+
+# Install packages differs for container-based infrastructure
+# * https://docs.travis-ci.com/user/migrating-from-legacy/#How-do-I-install-APT-sources-and-packages%3F
+addons:
+  apt:
+    packages:
+      - libegl1-mesa-dev
+
+script:
+  # Info about OS
+  - uname -a
+
+  - ls /usr/include/GL/glu.h || echo 'glu.h not found'
+
+branches:
+  except:
+    - /^pr\..*/
